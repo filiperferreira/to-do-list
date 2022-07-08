@@ -1,0 +1,7 @@
+<div *ngIf="editingTask">
+    <input [(ngModel)]="editingTask.task.task_name">
+    <button (click)="onAddTask()">
+        <span *ngIf="!editingTask.editing">Add Task</span>
+        <span *ngIf="editingTask.editing">Edit Task</span>
+    </button>
+</div>

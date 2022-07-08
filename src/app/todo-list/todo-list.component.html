@@ -1,0 +1,18 @@
+<div>
+    <button *ngIf="filter != 0" (click)="filter = 0">Show All</button>
+    <button *ngIf="filter != 1" (click)="filter = 1">Show Only Completed</button>
+    <button *ngIf="filter != 2" (click)="filter = 2">Show Only Incomplete</button>
+    <br><br>
+    <table>
+        <tr *ngFor="let item of filterList(filter, list)">
+            <td><input type="checkbox" [(ngModel)]="item.completed"></td>
+            <td><label> {{item.task_name}}</label></td>
+            <td><button (click)="editTask(item)">Edit Task</button></td>
+        </tr>
+    </table>
+    <br>
+    <button *ngIf="!editingTask" (click)="createNewTask()">Create New Task</button>
+</div>
+<app-task-editor
+    [editingTask]="editingTask"
+    (taskCreated)="onTaskCreated($event)"></app-task-editor>
