@@ -9,11 +9,11 @@ import { Task } from '../task';
 
 export class TodoListComponent implements OnInit {
   list: Task[] = [
-    {'task_name': 'Edit/Create Tasks', 'completed': true},
-    {'task_name': 'Only Completed Tasks', 'completed': true},
-    {'task_name': 'Only Uncompleted Tasks', 'completed': true},
-    {'task_name': 'Task Creation Date', 'completed': false},
-    {'task_name': 'Save List', 'completed': false}
+    {'id': 0, 'task_name': 'Edit/Create Tasks', 'completed': true},
+    {'id': 1, 'task_name': 'Only Completed Tasks', 'completed': true},
+    {'id': 2, 'task_name': 'Only Uncompleted Tasks', 'completed': true},
+    {'id': 3, 'task_name': 'Task Creation Date', 'completed': false},
+    {'id': 4, 'task_name': 'Save List', 'completed': false}
   ];
   editingTask?: {editing: boolean; task: Task};
   filter = 0;
@@ -28,12 +28,18 @@ export class TodoListComponent implements OnInit {
   }
 
   createNewTask() {
-    this.editingTask = {editing: false, task: {'task_name': 'new task', 'completed': false}};
+    this.editingTask = {editing: false,
+      task: {'id': this.list.length, 'task_name': 'new task', 'completed': false}};
   }
 
-  onTaskCreated(task: {editing: boolean; task: Task}) {
-    if (!task.editing) {
-      this.list.push(task.task);
+  onTaskCreated(editedTask: {editing: boolean; task: Task}) {
+    if (editedTask) {
+      if (!editedTask.editing) {
+        this.list.push(editedTask.task);
+      }
+      else {
+        this.list[editedTask.task.id].task_name = editedTask.task.task_name;
+      }
     }
     this.editingTask = undefined;
   }

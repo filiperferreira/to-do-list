@@ -15,8 +15,16 @@ export class TaskEditorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddTask() {
-    this.taskCreated.emit(this.editingTask);
+  onAddTask(task_name?: string) {
+    if (task_name) {
+      if (this.editingTask) {
+        this.editingTask.task.task_name = task_name;
+      }
+      this.taskCreated.emit(this.editingTask);
+    }
+    else {
+      this.taskCreated.emit(undefined);
+    }
     this.editingTask = undefined;
   }
 
