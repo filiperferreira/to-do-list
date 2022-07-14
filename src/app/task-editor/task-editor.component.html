@@ -1,8 +1,5 @@
 <div *ngIf="editingTask">
     <input value="{{editingTask.task.task_name}}" #task_name>
-    <button (click)="onAddTask(task_name.value)">
-        <span *ngIf="!editingTask.editing">Add Task</span>
-        <span *ngIf="editingTask.editing">Edit Task</span>
-    </button>
+    <button (click)="onAddTask(task_name.value)">Save</button>
     <button (click)="onAddTask()">Cancel</button>
 </div>
